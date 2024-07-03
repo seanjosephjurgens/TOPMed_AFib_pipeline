@@ -8,6 +8,7 @@ minMAC=as.numeric(args[3])
 vcMAXAAF=as.numeric(args[4])
 lessthan_vcMAXAAF_remove=as.logical(args[5])
 maxMAF_cutoff=as.numeric(args[6])
+canonical_only=as.logical(args[7])
 
 library(data.table)
 .libPaths(c("rpackages4_1_3",.libPaths()))
@@ -21,6 +22,11 @@ dat <- dat[which(!grepl("singleton", dat$ALLELE1)), ]
 # fix pext coding issues
 dat$ID <- gsub("pext0.8", "pext80", dat$ID)
 dat$ID <- gsub("pext0.9", "pext90", dat$ID)
+
+# Canonical only filter
+if(canonical_only){
+    dat <- dat[which(grepl("canonical", dat$ID) | grepl("CANONICAL", dat$ID)), ]
+}
 
 # MAF cutoff filter
 if(!is.na(maxMAF_cutoff)){
