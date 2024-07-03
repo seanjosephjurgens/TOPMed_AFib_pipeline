@@ -96,6 +96,18 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         ))
         try(uniques <- unique(lof$ALLELE1))
         try(length <- length(uniques))
+        ## find the mask with largest number - which should encompass all masks/variants! - and run that one first.
+        num_rawassocs <- NULL
+        if(length>1 | is.null(length)){
+            for(unique_num in uniques){
+                num_rawassocs <- c(num_rawassocs, nrow(lof[lof$ALLELE1==unique_num, ]))
+            }
+            max_rawassocs <- which(num_rawassocs==max(num_rawassocs))[1]
+            if(max_rawassocs!=1){
+                uniques <- c(uniques[max_rawassocs], uniques[-max_rawassocs])
+            }
+        }
+        
         if(length==0 | is.null(length)){
             lof <- NULL
         }else if(length==1){
@@ -143,6 +155,18 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         ))
         try(uniques <- unique(missense$ALLELE1))
         try(length <- length(uniques))
+        ## find the mask with largest number - which should encompass all masks/variants! - and run that one first.
+        num_rawassocs <- NULL
+        if(length>1 | is.null(length)){
+            for(unique_num in uniques){
+                num_rawassocs <- c(num_rawassocs, nrow(missense[missense$ALLELE1==unique_num, ]))
+            }
+            max_rawassocs <- which(num_rawassocs==max(num_rawassocs))[1]
+            if(max_rawassocs!=1){
+                uniques <- c(uniques[max_rawassocs], uniques[-max_rawassocs])
+            }
+        }
+        
         if(length==0 | is.null(length)){
             missense <- NULL
         }else if(length==1){
@@ -190,6 +214,17 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         ))
         try(uniques <- unique(lofmissense$ALLELE1))
         try(length <- length(uniques))
+        ## find the mask with largest number - which should encompass all masks/variants! - and run that one first.
+        num_rawassocs <- NULL
+        if(length>1 | is.null(length)){
+            for(unique_num in uniques){
+                num_rawassocs <- c(num_rawassocs, nrow(lofmissense[lofmissense$ALLELE1==unique_num, ]))
+            }
+            max_rawassocs <- which(num_rawassocs==max(num_rawassocs))[1]
+            if(max_rawassocs!=1){
+                uniques <- c(uniques[max_rawassocs], uniques[-max_rawassocs])
+            }
+        }
         if(length==0 | is.null(length)){
             lofmissense1 <- lofmissense <- NULL
         }else if(length==1){
@@ -239,6 +274,18 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         ))
         try(uniques <- unique(lofmissense$ALLELE1))
         try(length <- length(uniques))
+        ## find the mask with largest number - which should encompass all masks/variants! - and run that one first.
+        num_rawassocs <- NULL
+        if(length>1 | is.null(length)){
+            for(unique_num in uniques){
+                num_rawassocs <- c(num_rawassocs, nrow(lofmissense[lofmissense$ALLELE1==unique_num, ]))
+            }
+            max_rawassocs <- which(num_rawassocs==max(num_rawassocs))[1]
+            if(max_rawassocs!=1){
+                uniques <- c(uniques[max_rawassocs], uniques[-max_rawassocs])
+            }
+        }
+        
         if(length==0 | is.null(length)){
             lofmissense <- NULL
         }else if(length==1){
