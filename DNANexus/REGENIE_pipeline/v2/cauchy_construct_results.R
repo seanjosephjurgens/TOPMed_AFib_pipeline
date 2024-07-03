@@ -24,8 +24,10 @@ dat$ID <- gsub("pext0.8", "pext80", dat$ID)
 dat$ID <- gsub("pext0.9", "pext90", dat$ID)
 
 # Canonical only filter
-if(canonical_only){
-    dat <- dat[which(grepl("canonical", dat$ID) | grepl("CANONICAL", dat$ID)), ]
+if(!is.na(canonical_only){
+    if(canonical_only){
+        dat <- dat[which(grepl("canonical", dat$ID) | grepl("CANONICAL", dat$ID)), ]
+    }
 }
 
 # MAF cutoff filter
