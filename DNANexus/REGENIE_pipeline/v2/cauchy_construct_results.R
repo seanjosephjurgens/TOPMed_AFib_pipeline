@@ -28,7 +28,7 @@ if(!is.na(maxMAF_cutoff)){
         message("WARNING: 'maxMAF_cutoff' set lower than 'vcMAXAAF' which will yield strange results. Stopping.")
         stop()
     }else{
-        dat <- dat[which(as.numeric(paste0("0\\.", gsub(".*\\.", "", dat$ALLELE1)))<=maxMAF_cutoff, ]
+        dat <- dat[which(as.numeric(paste0("0\\.", gsub(".*\\.", "", dat$ALLELE1)))<=maxMAF_cutoff), ]
     }
 }
 
