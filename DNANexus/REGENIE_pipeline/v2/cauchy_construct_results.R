@@ -28,7 +28,12 @@ if(!is.na(maxMAF_cutoff)){
         message("WARNING: 'maxMAF_cutoff' set lower than 'vcMAXAAF' which will yield strange results. Stopping.")
         stop()
     }else{
-        dat <- dat[which(as.numeric(paste0("0.", gsub(".*\\.", "", dat$ALLELE1)))<=maxMAF_cutoff), ]
+        mafs <- dat$ALLELE1
+        mafs <- paste0("", gsub(".*\\.", "", mafs))
+        mafs[which(grepl("singleton", mafs))] <- "0.0"
+        mafs[which(!grepl("e", mafs))] <- paste0("0.", gsub(".*\\.", "", mafs[which(!grepl("e", mafs))]))
+        mafs <- as.numeric(mafs)
+        dat <- dat[which(mafs<=maxMAF_cutoff), ]
     }
 }
 
