@@ -7,6 +7,7 @@ cauchy_outfile=as.character(args[2])
 minMAC=as.numeric(args[3])
 vcMAXAAF=as.numeric(args[4])
 lessthan_vcMAXAAF_remove=as.logical(args[5])
+maxMAF_cutoff=as.numeric(args[6])
 
 library(data.table)
 .libPaths(c("rpackages4_1_3",.libPaths()))
@@ -20,6 +21,16 @@ dat <- dat[which(!grepl("singleton", dat$ALLELE1)), ]
 # fix pext coding issues
 dat$ID <- gsub("pext0.8", "pext80", dat$ID)
 dat$ID <- gsub("pext0.9", "pext90", dat$ID)
+
+# MAF cutoff filter
+if(!is.na(maxMAF_cutoff)){
+    if(maxMAF_cutoff<vcMAXAAF){
+        message("WARNING: 'maxMAF_cutoff' set lower than 'vcMAXAAF' which will yield strange results. Stopping.")
+        stop()
+    }else{
+        dat <- dat[which(as.numeric(paste0("0\\.", gsub(".*\\.", "", dat$ALLELE1)))<=maxMAF_cutoff, ]
+    }
+}
 
 if(nrow(dat)==0 | "V2" %in% colnames(dat)){
     cat("\n\n\nNo tests in REGENIE output!! Perhaps no REGENIE tests passing filters.\n\n\n")
