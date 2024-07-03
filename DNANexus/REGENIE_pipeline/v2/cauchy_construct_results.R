@@ -157,9 +157,9 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         lofmissense1 <- lofmissense <- NULL
         uniques <- NULL
         length <- NULL
-        try(lofmissense <- cbind(burden[which(grepl("LOFmissense", burden$ALLELE1) | grepl("lofmissense", burden$ALLELE1)), 
+        try(lofmissense <- cbind(burden[which(grepl("LOFmissense", burden$ALLELE1) | grepl("lofmissense", burden$ALLELE1) | grepl("LOF_missense", burden$ALLELE1) | grepl("lof_missense", burden$ALLELE1)), 
                             c("ID", "TRANSCRIPT_ID", "GENE_ID", "ALLELE1", "CHROM", "GENPOS", "N")],
-                     burden[which(grepl("LOFmissense", burden$ALLELE1) | grepl("lofmissense", burden$ALLELE1)),                
+                     burden[which(grepl("LOFmissense", burden$ALLELE1) | grepl("lofmissense", burden$ALLELE1) | grepl("LOF_missense", burden$ALLELE1) | grepl("lof_missense", burden$ALLELE1)),                
                             c(which(grepl("BURDEN_", colnames(burden))),
                               which(grepl("ACATV_", colnames(burden))),
                               which(grepl("SKAT_", colnames(burden))))]
@@ -206,9 +206,9 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         lofmissense <- NULL
         uniques <- NULL
         length <- NULL
-        try(lofmissense <- cbind(burden[which(grepl("LOFnoflagmissense", burden$ALLELE1) | grepl("lofnoflagmissense", burden$ALLELE1)), 
+        try(lofmissense <- cbind(burden[which(grepl("LOFnoflagmissense", burden$ALLELE1) | grepl("lofnoflagmissense", burden$ALLELE1) | which(grepl("LOFnoflag_missense", burden$ALLELE1) | which(grepl("lofnoflag_missense", burden$ALLELE1)), 
                             c("ID", "TRANSCRIPT_ID", "GENE_ID", "ALLELE1", "CHROM", "GENPOS", "N")],
-                     burden[which(grepl("LOFnoflagmissense", burden$ALLELE1) | grepl("lofnoflagmissense", burden$ALLELE1)),                
+                     burden[which(grepl("LOFnoflagmissense", burden$ALLELE1) | grepl("lofnoflagmissense", burden$ALLELE1) | grepl("LOFnoflag_missense", burden$ALLELE1) | grepl("lofnoflag_missense", burden$ALLELE1)),                
                             c(which(grepl("BURDEN_", colnames(burden))),
                               which(grepl("ACATV_", colnames(burden))),
                               which(grepl("SKAT_", colnames(burden))))]
