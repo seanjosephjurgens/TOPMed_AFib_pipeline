@@ -386,11 +386,11 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
                 lofmissensenew <- merge(lofmissensenew, inter, by="GENE_ID", all=T)
             }
             lofmissense <- lofmissensenew
-            lofmissense <- lofmissense[,-(which(colnames(lofmissense) %in% c("TRANSCRIPT_ID", "transcript_type")))]
+            if("TRANSCRIPT_ID" %in% colnames(lofmissense) | "transcript_type" %in% colnames(lofmissense)){lofmissense <- lofmissense[,-(which(colnames(lofmissense) %in% c("TRANSCRIPT_ID", "transcript_type")))]}
             lofmissense$gene_cauchy_LOG10P <- apply(X=lofmissense[,which(grepl("transcript_cauchy_LOG10P", colnames(lofmissense)))], MARGIN=1, FUN=cauchy)
         }else{
             lofmissense <- lofmissense[lofmissense$transcript_type==uniques[1], c(1, 7:(ncol(lofmissense)))]
-            lofmissense <- lofmissense[,-(which(colnames(lofmissense) %in% c("TRANSCRIPT_ID", "transcript_type")))]
+            if("TRANSCRIPT_ID" %in% colnames(lofmissense) | "transcript_type" %in% colnames(lofmissense)){lofmissense <- lofmissense[,-(which(colnames(lofmissense) %in% c("TRANSCRIPT_ID", "transcript_type")))]}
             colnames(lofmissense)[c(2:(ncol(lofmissense)))] <-  paste0(uniques[1], ":", colnames(lofmissense)[c(2:(ncol(lofmissense)))])
             lofmissense$gene_cauchy_LOG10P <- lofmissense[,which(grepl("transcript_cauchy_LOG10P", colnames(lofmissense)))]
         }
