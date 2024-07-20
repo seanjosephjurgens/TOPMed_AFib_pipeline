@@ -53,7 +53,9 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
     write.table(burden, file=cauchy_outfile, col.names=T, row.names=F, quote=F, sep='\t')
 }else{
     dat$TRANSCRIPT_ID <- gsub("\\..*", "", dat$ID)
+    print(head(dat$TRANSCRIPT_ID))
     dat$GENE_ID <- gsub("__.*", "", dat$TRANSCRIPT_ID)
+    print(head(dat$GENE_ID))
     #head(dat)
     
     #### Merge by mask ####
