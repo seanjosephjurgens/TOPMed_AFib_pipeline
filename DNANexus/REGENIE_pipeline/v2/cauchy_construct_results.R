@@ -14,6 +14,8 @@ library(data.table)
 .libPaths(c("rpackages4_1_3",.libPaths()))
 source("UKBB_200KWES_CVD/Cauchy_test.R")
 
+message("Input filtering...")
+
 dat <- fread(regenie_outfile, stringsAsFactors = F, data.table=F)
 # filter failed tests
 dat <- dat[which(is.na(dat$EXTRA) | is.null(dat$EXTRA) | grepl("DF=", dat$EXTRA)), ]
@@ -81,12 +83,14 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         burden <- merge(burden, ACATO, by="ID", all.x=T, all.y=F)
         #burden <- merge(burden, SBAT, by="ID", all.x=T, all.y=F)
         rm(dat)
-        
+
+        message("Merging by mask groupings...")
         ### Merge by mask groupings, e.g. LOF, missense and LOF+missense
         cauchy <- function(line){
             return(CCT(pvals=line, weights=NULL, log10p=TRUE, ignore0s=FALSE, ignore1s=TRUE))
         }
         
+        message("\tLOF masks...")
         lof <- NULL
         uniques <- NULL
         length <- NULL
@@ -145,7 +149,8 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
             lof$LOF_cauchy_LOG10P <- apply(X=lof[,which(grepl("LOG10P", colnames(lof)))], MARGIN=1, FUN=cauchy)
             lof <- lof[,-(which(colnames(lof)=="ALLELE1"))]
         }
-
+            
+        message("\tmissense masks...")
         missense <- NULL
         uniques <- NULL
         length <- NULL
@@ -205,6 +210,7 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
             missense <- missense[,-(which(colnames(missense)=="ALLELE1"))]
         }
 
+        message("\tLOF+missense masks...")
         lofmissense1 <- lofmissense <- NULL
         uniques <- NULL
         length <- NULL
@@ -338,6 +344,7 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         }
         
         ############ Merge by transcript ############
+        message("Merging by transcript...")
         try(lofmissense <- merge(lofmissense, missense[,c(1, 6:ncol(missense))], by="TRANSCRIPT_ID", all=T))
         try(lofmissense <- merge(lofmissense, lof[,c(1, 6:ncol(lof))], by="TRANSCRIPT_ID", all=T))
         ### Add SBAT results
@@ -357,6 +364,7 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         rm(lof, missense)
                             
         ############ Merge by gene ############
+        message("Merging by gene...")
         uniques <- unique(lofmissense$transcript_type)
         length <- length(uniques)
         if(length==0 | is.null(length)){
