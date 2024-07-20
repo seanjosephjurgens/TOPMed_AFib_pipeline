@@ -63,6 +63,7 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         burden <- NULL
         write.table(burden, file=cauchy_outfile, col.names=T, row.names=F, quote=F, sep='\t')
     }else{
+        message(colnames(burden))
         burden <- burden[,c("TRANSCRIPT_ID", "GENE_ID", "CHROM", "GENPOS", "ID", "ALLELE0", "ALLELE1", "A1FREQ",
                             "N", "N.SAMPLE.ALT", "BETA", "SE", "CHISQ", "LOG10P")]
         colnames(burden)[c(11:14)] <- paste0("BURDEN_", colnames(burden)[c(11:14)])
