@@ -345,6 +345,9 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         
         ############ Merge by transcript ############
         message("Merging by transcript...")
+        print(colnames(lofmissense))
+        print(colnames(missense[,c(1, 6:ncol(missense))]))
+        print(colnames(missense))
         try(lofmissense <- merge(lofmissense, missense[,c(1, 6:ncol(missense))], by="TRANSCRIPT_ID", all=T))
         try(lofmissense <- merge(lofmissense, lof[,c(1, 6:ncol(lof))], by="TRANSCRIPT_ID", all=T))
         ### Add SBAT results
