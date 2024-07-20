@@ -114,7 +114,7 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         if(length==0 | is.null(length)){
             lof <- NULL
         }else if(length==1){
-            if(lessthan_vcMAXAAF_remove & !grepl(paste0(vcMAXAAF), uniques[i])){
+            if(lessthan_vcMAXAAF_remove & !grepl(paste0(vcMAXAAF), uniques[1])){
                 lof <- lof[,c("TRANSCRIPT_ID", "GENE_ID", "ALLELE1", "CHROM", "GENPOS", "N", "BURDEN_LOG10P")]
             }else{
                 lof <- lof[,c("TRANSCRIPT_ID", "GENE_ID", "ALLELE1", "CHROM", "GENPOS", "N", 
@@ -173,7 +173,7 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         if(length==0 | is.null(length)){
             missense <- NULL
         }else if(length==1){
-            if(lessthan_vcMAXAAF_remove & !grepl(paste0(vcMAXAAF), uniques[i])){
+            if(lessthan_vcMAXAAF_remove & !grepl(paste0(vcMAXAAF), uniques[1])){
                 missense <- missense[,c("TRANSCRIPT_ID", "GENE_ID", "ALLELE1", "CHROM", "GENPOS", "N", "BURDEN_LOG10P")]
             }else{
                 missense <- missense[,c("TRANSCRIPT_ID", "GENE_ID", "ALLELE1", "CHROM", "GENPOS", "N", 
@@ -231,7 +231,7 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         if(length==0 | is.null(length)){
             lofmissense1 <- lofmissense <- NULL
         }else if(length==1){
-            if(lessthan_vcMAXAAF_remove & !grepl(paste0(vcMAXAAF), uniques[i])){
+            if(lessthan_vcMAXAAF_remove & !grepl(paste0(vcMAXAAF), uniques[1])){
                 lofmissense <- lofmissense[,c("TRANSCRIPT_ID", "GENE_ID", "ALLELE1", "CHROM", "GENPOS", "N", "BURDEN_LOG10P")]
             }else{
                 lofmissense <- lofmissense[,c("TRANSCRIPT_ID", "GENE_ID", "ALLELE1", "CHROM", "GENPOS", "N", 
@@ -292,7 +292,7 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         if(length==0 | is.null(length)){
             lofmissense <- NULL
         }else if(length==1){
-            if(lessthan_vcMAXAAF_remove & !grepl(paste0(vcMAXAAF), uniques[i])){
+            if(lessthan_vcMAXAAF_remove & !grepl(paste0(vcMAXAAF), uniques[1])){
                 lofmissense <- lofmissense[,c("TRANSCRIPT_ID", "GENE_ID", "ALLELE1", "CHROM", "GENPOS", "N", "BURDEN_LOG10P")]
             }else{
                 lofmissense <- lofmissense[,c("TRANSCRIPT_ID", "GENE_ID", "ALLELE1", "CHROM", "GENPOS", "N", 
