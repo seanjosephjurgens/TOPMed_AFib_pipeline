@@ -371,6 +371,7 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         ############ Merge by gene ############
         message("Merging by gene...")
         uniques <- unique(lofmissense$transcript_type)
+        print(head(uniques))
         length <- length(uniques)
         if(length==0 | is.null(length)){
             lofmissense <- NULL
