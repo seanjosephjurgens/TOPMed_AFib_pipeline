@@ -9,6 +9,7 @@ vcMAXAAF=as.numeric(args[4])
 lessthan_vcMAXAAF_remove=as.logical(args[5])
 maxMAF_cutoff=as.numeric(args[6])
 canonical_only=as.logical(args[7])
+keep_singletons=as.logical(args[8])
 
 library(data.table)
 .libPaths(c("rpackages4_1_3",.libPaths()))
@@ -20,7 +21,11 @@ dat <- fread(regenie_outfile, stringsAsFactors = F, data.table=F)
 # filter failed tests
 dat <- dat[which(is.na(dat$EXTRA) | is.null(dat$EXTRA) | grepl("DF=", dat$EXTRA)), ]
 # remove singleton masks
-dat <- dat[which(!grepl("singleton", dat$ALLELE1)), ]
+if(is.na(keep_singletons)){
+    dat <- dat[which(!grepl("singleton", dat$ALLELE1)), ]
+}else if(!keep_singletons){
+    dat <- dat[which(!grepl("singleton", dat$ALLELE1)), ]
+}
 # fix pext coding issues
 dat$ID <- gsub("pext0.8", "pext80", dat$ID)
 dat$ID <- gsub("pext0.9", "pext90", dat$ID)
