@@ -399,7 +399,14 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
             colnames(lofmissense)[c(2:(ncol(lofmissense)))] <-  paste0(uniques[1], ":", colnames(lofmissense)[c(2:(ncol(lofmissense)))])
             lofmissense$gene_cauchy_LOG10P <- lofmissense[,which(grepl("transcript_cauchy_LOG10P", colnames(lofmissense)))]
         }
-        
+
+        # Remove columns with no meaningful data (depends on input)
+        rm_col <- NULL
+        for(i in c(1:(ncol(lofmissense)))){
+            if(all(is.na(lofmissense[,i]))){rm_col <- c(rm_col,i)}
+        }
+        lofmissense <- lofmissense[,-rm_col]
+
         write.table(lofmissense, file=cauchy_outfile, col.names=T, row.names=F, quote=F, sep='\t')
     }
 }
