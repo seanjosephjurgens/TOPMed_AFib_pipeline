@@ -405,7 +405,7 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
         for(i in c(1:(ncol(lofmissense)))){
             if(all(is.na(lofmissense[,i]))){rm_col <- c(rm_col,i)}
         }
-        lofmissense <- lofmissense[,-rm_col]
+        if(!is.null(rm_col)) {lofmissense <- lofmissense[,-rm_col]}
 
         write.table(lofmissense, file=cauchy_outfile, col.names=T, row.names=F, quote=F, sep='\t')
     }
