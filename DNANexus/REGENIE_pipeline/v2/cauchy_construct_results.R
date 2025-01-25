@@ -10,6 +10,7 @@ lessthan_vcMAXAAF_remove=as.logical(args[5])
 maxMAF_cutoff=as.numeric(args[6])
 canonical_only=as.logical(args[7])
 keep_singletons=as.logical(args[8])
+cMAC_col=as.character(args[9])
 
 library(data.table)
 .libPaths(c("rpackages4_1_3",.libPaths()))
@@ -65,8 +66,14 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
     
     #### Merge by mask ####
     burden <- dat[dat$TEST=="ADD", ]
-    burden$N.SAMPLE.ALT <- burden$A1FREQ * burden$N * 2
+    # Remove results with low MAC; if MAC column provided use that for filtering
+    if(!is.null(cMAC_col)){
+        burden$N.SAMPLE.ALT  <- burden[, cMAC_col]
+    }else{
+        burden$N.SAMPLE.ALT <- burden$A1FREQ * burden$N * 2
+    }
     burden <- burden[burden$N.SAMPLE.ALT>=minMAC, ]
+    
     if(nrow(burden)==0){
         cat("\n\n\nNo tests reaching minor allele count.!!\n\n\n")
         burden <- NULL
