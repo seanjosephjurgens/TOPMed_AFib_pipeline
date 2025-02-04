@@ -67,7 +67,7 @@ if(nrow(dat)==0 | "V2" %in% colnames(dat)){
     #### Merge by mask ####
     burden <- dat[dat$TEST=="ADD", ]
     # Remove results with low MAC; if MAC column provided use that for filtering
-    if(!is.null(cMAC_col)){
+    if(!is.na(cMAC_col)){
         burden$N.SAMPLE.ALT  <- burden[, cMAC_col]
     }else{
         burden$N.SAMPLE.ALT <- burden$A1FREQ * burden$N * 2
