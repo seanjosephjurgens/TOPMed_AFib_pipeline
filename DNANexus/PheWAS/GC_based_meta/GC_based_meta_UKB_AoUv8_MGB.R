@@ -160,5 +160,6 @@ code <- codes[code_num]
         system(paste0("gzip AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv"))
       }
     }
-  
+  }
+
 }
