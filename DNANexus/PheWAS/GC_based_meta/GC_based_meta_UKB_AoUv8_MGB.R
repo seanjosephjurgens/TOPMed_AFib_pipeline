@@ -1,6 +1,7 @@
 #for(code_num in c(2:length(codes))){
   #code <- codes[code_num]
 args <- commandArgs(trailingOnly = TRUE)
+print(args)
 code_num <- args[1]
 
 files1 <- list.files()
@@ -26,6 +27,7 @@ codes <- gsub("_maleonly.*", "", codes)
 codes <- unique(codes)
 length(codes)
 head(codes,n=30)
+
 code <- codes[code_num]
 
   message("  ")
