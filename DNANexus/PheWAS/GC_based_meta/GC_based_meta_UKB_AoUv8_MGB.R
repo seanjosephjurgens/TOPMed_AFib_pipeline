@@ -29,7 +29,7 @@ length(codes)
 head(codes,n=30)
 
 chunks <- split(c(1:length(codes)), cut(seq_along(codes), 200, labels = FALSE))
-chunk <- chunks[chunk_num]
+chunk <- chunks[[chunk_num]]
 
 for(code_num in chunk){
   code <- codes[code_num]
