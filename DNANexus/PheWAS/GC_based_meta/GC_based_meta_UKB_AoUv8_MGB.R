@@ -2,7 +2,7 @@
   #code <- codes[code_num]
 args <- commandArgs(trailingOnly = TRUE)
 print(args)
-code_num <- args[1]
+code_num <- as.numeric(args[1])
 
 files1 <- list.files()
 files1 <- files1[which(grepl("UKB_sumstats", files1))]
