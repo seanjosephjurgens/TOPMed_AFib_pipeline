@@ -27,3 +27,6 @@ dx download exome-seq:/sjj/projects/phewas/v2/sum_stats_collected/MGB/for_meta/*
 tar -xzf MGB_sumstats_formeta.tar.gz
 
 Rscript GC_based_meta_UKB_AoUv8_MGB.R
+
+cd ..
+rm -rf tmp/
