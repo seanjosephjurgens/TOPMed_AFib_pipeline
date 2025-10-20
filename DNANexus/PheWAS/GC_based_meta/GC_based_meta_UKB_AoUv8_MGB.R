@@ -25,7 +25,7 @@ codes <- gsub("_femaleonly.*", "", codes)
 codes <- gsub("_maleonly.*", "", codes)
 codes <- unique(codes)
 length(codes)
-head(codes)
+head(codes,n=30)
 code <- codes[code_num]
 
   message("  ")
