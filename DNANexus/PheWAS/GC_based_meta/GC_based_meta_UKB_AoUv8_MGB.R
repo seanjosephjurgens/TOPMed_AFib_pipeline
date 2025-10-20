@@ -102,7 +102,7 @@ code <- codes[code_num]
   if(!(is.na(ukb_file) & is.na(aou_file))){
     message("Running UKB-AoU meta")
     if(is.na(mgb_file)){
-      system(paste0("cp UKB_AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz  UKB_AoUv8_meta_results_", code, "_", sex, "_adjusted.tsv.gz"), intern=TRUE)
+      system(paste0("cp ../UKB_AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz  ../UKB_AoUv8_meta_results_", code, "_", sex, "_adjusted.tsv.gz"), intern=TRUE)
     }else{
       cohort_files <- c(ukb_file, aou_file)
       cohort_files <- cohort_files[!is.na(cohort_files)]
@@ -111,11 +111,11 @@ code <- codes[code_num]
       system(paste0("./UKBB_200KWES_CVD/metal_meta.sh UKB_AoUv8_meta_results_", code, "_", sex, "_version ", cohort_files_collapse), intern=TRUE)
       if(length(cohort_files)>1){
         system(paste0("Rscript ./UKBB_200KWES_CVD/genotype_count_based_meta_analysis_dominant.R UKB_AoUv8_meta_results_", code, "_", sex, "_version1.tbl ", 
-                      "UKB_AoUv8_meta_results_", code, "_", sex, "_adjusted.tsv ",
+                      "../UKB_AoUv8_meta_results_", code, "_", sex, "_adjusted.tsv ",
                       0.1, " ", 0.05, " ", cohort_files_collapse), intern=TRUE) 
       }else{
-        system(paste0("mv UKB_AoUv8_meta_results_", code, "_", sex, "_version1.tbl UKB_AoUv8_meta_results_", code, "_", sex, "_adjusted.tsv"), intern=TRUE)
-        system(paste0("gzip UKB_AoUv8_meta_results_", code, "_", sex, "_adjusted.tsv"))
+        system(paste0("mv UKB_AoUv8_meta_results_", code, "_", sex, "_version1.tbl ../UKB_AoUv8_meta_results_", code, "_", sex, "_adjusted.tsv"), intern=TRUE)
+        system(paste0("gzip ../UKB_AoUv8_meta_results_", code, "_", sex, "_adjusted.tsv"))
       }
     }
   }
@@ -124,7 +124,7 @@ code <- codes[code_num]
   if(!(is.na(ukb_file) & is.na(mgb_file))){
     message("Running UKB-MGB meta")
     if(is.na(aou_file)){
-      system(paste0("cp UKB_AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz  UKB_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz"), intern=TRUE)
+      system(paste0("cp ../UKB_AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz  ../UKB_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz"), intern=TRUE)
     }else{
       cohort_files <- c(ukb_file, mgb_file)
       cohort_files <- cohort_files[!is.na(cohort_files)]
@@ -133,11 +133,11 @@ code <- codes[code_num]
       system(paste0("./UKBB_200KWES_CVD/metal_meta.sh UKB_MGB_meta_results_", code, "_", sex, "_version ", cohort_files_collapse), intern=TRUE)
       if(length(cohort_files)>1){
         system(paste0("Rscript ./UKBB_200KWES_CVD/genotype_count_based_meta_analysis_dominant.R UKB_MGB_meta_results_", code, "_", sex, "_version1.tbl ", 
-                      "UKB_MGB_meta_results_", code, "_", sex, "_adjusted.tsv ",
+                      "../UKB_MGB_meta_results_", code, "_", sex, "_adjusted.tsv ",
                       0.1, " ", 0.05, " ", cohort_files_collapse), intern=TRUE) 
       }else{
-        system(paste0("mv UKB_MGB_meta_results_", code, "_", sex, "_version1.tbl UKB_MGB_meta_results_", code, "_", sex, "_adjusted.tsv"), intern=TRUE)
-        system(paste0("gzip UKB_MGB_meta_results_", code, "_", sex, "_adjusted.tsv"))
+        system(paste0("mv UKB_MGB_meta_results_", code, "_", sex, "_version1.tbl ../UKB_MGB_meta_results_", code, "_", sex, "_adjusted.tsv"), intern=TRUE)
+        system(paste0("gzip ../UKB_MGB_meta_results_", code, "_", sex, "_adjusted.tsv"))
       }
     }
   }
@@ -146,7 +146,7 @@ code <- codes[code_num]
   if(!(is.na(mgb_file) & is.na(aou_file))){
     message("Running AoU-MGB meta")
     if(is.na(ukb_file)){
-      system(paste0("cp UKB_AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz  AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz"), intern=TRUE)
+      system(paste0("cp ../UKB_AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz  ../AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz"), intern=TRUE)
     }else{
       cohort_files <- c(aou_file, mgb_file)
       cohort_files <- cohort_files[!is.na(cohort_files)]
@@ -155,11 +155,11 @@ code <- codes[code_num]
       system(paste0("./UKBB_200KWES_CVD/metal_meta.sh AoUv8_MGB_meta_results_", code, "_", sex, "_version ", cohort_files_collapse), intern=TRUE)
       if(length(cohort_files)>1){
         system(paste0("Rscript ./UKBB_200KWES_CVD/genotype_count_based_meta_analysis_dominant.R AoUv8_MGB_meta_results_", code, "_", sex, "_version1.tbl ", 
-                      "AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv ",
+                      "../AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv ",
                       0.1, " ", 0.05, " ", cohort_files_collapse), intern=TRUE) 
       }else{
-        system(paste0("mv AoUv8_MGB_meta_results_", code, "_", sex, "_version1.tbl AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv"), intern=TRUE)
-        system(paste0("gzip AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv"))
+        system(paste0("mv AoUv8_MGB_meta_results_", code, "_", sex, "_version1.tbl ../AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv"), intern=TRUE)
+        system(paste0("gzip ../AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv"))
       }
     }
   }
