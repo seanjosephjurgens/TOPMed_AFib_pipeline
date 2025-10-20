@@ -2,7 +2,7 @@
   #code <- codes[code_num]
 args <- commandArgs(trailingOnly = TRUE)
 print(args)
-code_num <- as.numeric(args[1])
+chunk_num <- as.numeric(args[1])
 
 files1 <- list.files()
 files1 <- files1[which(grepl("UKB_sumstats", files1))]
@@ -28,7 +28,11 @@ codes <- unique(codes)
 length(codes)
 head(codes,n=30)
 
-code <- codes[code_num]
+chunks <- split(c(1:length(codes)), cut(seq_along(codes), 200, labels = FALSE))
+chunk <- chunks[chunk_num]
+
+for(code_num in chunk){
+  code <- codes[code_num]
 
   message("  ")
   message("  ")
