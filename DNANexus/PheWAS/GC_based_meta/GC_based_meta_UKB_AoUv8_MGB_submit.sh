@@ -30,3 +30,5 @@ Rscript ./TOPMed_AFib_pipeline/DNANexus/PheWAS/GC_based_meta/GC_based_meta_UKB_A
 
 cd ..
 rm -rf tmp/
+
+dx upload * --destination exome-seq:/sjj/projects/phewas/v2/sum_stats_collected/UKB_AoUv8_MGB_META/
