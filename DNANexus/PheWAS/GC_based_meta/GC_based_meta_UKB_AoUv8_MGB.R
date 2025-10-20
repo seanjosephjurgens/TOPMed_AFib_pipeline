@@ -1,13 +1,37 @@
 #for(code_num in c(2:length(codes))){
   #code <- codes[code_num]
 args <- commandArgs(trailingOnly = TRUE)
-code <- args[1]
+code_num <- args[1]
+
+files1 <- list.files()
+files1 <- files1[which(grepl("UKB_sumstats", files1))]
+files1 <- files1[which(grepl("formeta.tsv.gz", files1))]
+length(files1)
+
+files2 <- list.files()
+files2 <- files2[which(grepl("AoUv8_sumstats", files2))]
+files2 <- files2[which(grepl("formeta.tsv.gz", files2))]
+length(files2)
+
+files3 <- list.files()
+files3 <- files3[which(grepl("MGB_sumstats", files3))]
+files3 <- files3[which(grepl("formeta.tsv.gz", files3))]
+length(files3)
+
+files <- c(files1, files2, files3)
+codes <- gsub(".*_sumstats_", "", files)
+codes <- gsub("_bothsexes.*", "", codes)
+codes <- gsub("_femaleonly.*", "", codes)
+codes <- gsub("_maleonly.*", "", codes)
+codes <- unique(codes)
+length(codes)
+head(codes)
+code <- codes[code_num]
 
   message("  ")
   message("  ")
   message("  ")
-  #message("Busy with ", code, " which is number", code_num)
-  message("Busy with ", code)
+  message("Busy with ", code, " which is number", code_num)
   message("  ")
   message("  ")
   message("  ")
