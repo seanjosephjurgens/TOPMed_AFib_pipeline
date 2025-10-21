@@ -3,6 +3,7 @@
 args <- commandArgs(trailingOnly = TRUE)
 print(args)
 chunk_num <- as.numeric(args[1])
+n_chunks <- as.numeric(args[2])
 
 files1 <- list.files()
 files1 <- files1[which(grepl("UKB_sumstats", files1))]
@@ -26,10 +27,11 @@ codes <- gsub("_femaleonly.*", "", codes)
 codes <- gsub("_maleonly.*", "", codes)
 codes <- unique(codes)
 length(codes)
-head(codes,n=30)
+#head(codes,n=30)
 
-chunks <- split(c(1:length(codes)), cut(seq_along(codes), 200, labels = FALSE))
+chunks <- split(c(1:length(codes)), cut(seq_along(codes), n_chunks, labels = FALSE))
 chunk <- chunks[[chunk_num]]
+print(codes[chunk])
 
 for(code_num in chunk){
   code <- codes[code_num]
