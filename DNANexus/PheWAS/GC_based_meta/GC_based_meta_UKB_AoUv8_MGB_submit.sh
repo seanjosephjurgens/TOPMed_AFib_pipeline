@@ -1,4 +1,5 @@
 chunk_num=$1
+n_chunks=$2
 
 mkdir tmp/
 cd tmp/
@@ -26,7 +27,7 @@ tar -xzf AoUv8_sumstats_formeta.tar.gz
 dx download exome-seq:/sjj/projects/phewas/v2/sum_stats_collected/MGB/for_meta/*formeta.tar.gz
 tar -xzf MGB_sumstats_formeta.tar.gz
 
-Rscript ./TOPMed_AFib_pipeline/DNANexus/PheWAS/GC_based_meta/GC_based_meta_UKB_AoUv8_MGB.R ${chunk_num}
+Rscript ./TOPMed_AFib_pipeline/DNANexus/PheWAS/GC_based_meta/GC_based_meta_UKB_AoUv8_MGB.R ${chunk_num} ${n_chunks}
 
 cd ..
 rm -rf tmp/
