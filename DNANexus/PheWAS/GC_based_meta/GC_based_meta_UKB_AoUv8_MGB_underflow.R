@@ -33,13 +33,15 @@ codes <- gsub("_femaleonly.*", "", codes)
 codes <- gsub("_maleonly.*", "", codes)
 codes <- unique(codes)
 message("total codes: ", length(codes))
+message("example code: ", codes[1])
 #head(codes,n=30)
 if(rerun){
   rerun_codes <- rbind(data.table::fread('phecodes_need_removed.tsv', stringsAsFactors=F, data.table=F, header=F),
                        data.table::fread('phecodes_need_rerun.tsv', stringsAsFactors=F, data.table=F, header=F)
                  )
-  codes <- codes[which(codes%in%rerun_codes)]
+  codes <- codes[which(codes%in%rerun_codes[,1])]
   message("rerun codes: ", length(codes))
+  message("example rerun code: ", codes[1])
 }
 
 chunks <- split(c(1:length(codes)), cut(seq_along(codes), n_chunks, labels = FALSE))
