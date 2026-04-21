@@ -164,7 +164,7 @@ for(code_num in chunk){
   }
   
   # AoU MGB
-  if(!rerun}{
+  if(!rerun){
     if(!(is.na(mgb_file) & is.na(aou_file))){
       message("Running AoU-MGB meta")
       if(is.na(ukb_file)){
