@@ -164,25 +164,26 @@ for(code_num in chunk){
   }
   
   # AoU MGB
-  if(!(is.na(mgb_file) & is.na(aou_file))){
-    message("Running AoU-MGB meta")
-    if(is.na(ukb_file)){
-      system(paste0("cp ../UKB_AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz  ../AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz"), intern=TRUE)
-    }else{
-      cohort_files <- c(aou_file, mgb_file)
-      cohort_files <- cohort_files[!is.na(cohort_files)]
-      cohort_files_collapse <- paste0(cohort_files, collapse=" ")
-      message(cohort_files_collapse)
-      system(paste0("./UKBB_200KWES_CVD/metal_meta.sh AoUv8_MGB_meta_results_", code, "_", sex, "_version ", cohort_files_collapse), intern=TRUE)
-      if(length(cohort_files)>1){
-        system(paste0("Rscript ./UKBB_200KWES_CVD/genotype_count_based_meta_analysis_dominant_underflow.R AoUv8_MGB_meta_results_", code, "_", sex, "_version1.tbl ", 
-                      "../AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv ",
-                      0.1, " ", 0.05, " ", cohort_files_collapse), intern=TRUE) 
+  if(!rerun}{
+    if(!(is.na(mgb_file) & is.na(aou_file))){
+      message("Running AoU-MGB meta")
+      if(is.na(ukb_file)){
+        system(paste0("cp ../UKB_AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz  ../AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv.gz"), intern=TRUE)
       }else{
-        system(paste0("mv AoUv8_MGB_meta_results_", code, "_", sex, "_version1.tbl ../AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv"), intern=TRUE)
-        system(paste0("gzip ../AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv"))
+        cohort_files <- c(aou_file, mgb_file)
+        cohort_files <- cohort_files[!is.na(cohort_files)]
+        cohort_files_collapse <- paste0(cohort_files, collapse=" ")
+        message(cohort_files_collapse)
+        system(paste0("./UKBB_200KWES_CVD/metal_meta.sh AoUv8_MGB_meta_results_", code, "_", sex, "_version ", cohort_files_collapse), intern=TRUE)
+        if(length(cohort_files)>1){
+          system(paste0("Rscript ./UKBB_200KWES_CVD/genotype_count_based_meta_analysis_dominant_underflow.R AoUv8_MGB_meta_results_", code, "_", sex, "_version1.tbl ", 
+                        "../AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv ",
+                        0.1, " ", 0.05, " ", cohort_files_collapse), intern=TRUE) 
+        }else{
+          system(paste0("mv AoUv8_MGB_meta_results_", code, "_", sex, "_version1.tbl ../AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv"), intern=TRUE)
+          system(paste0("gzip ../AoUv8_MGB_meta_results_", code, "_", sex, "_adjusted.tsv"))
+        }
       }
     }
   }
-
 }
