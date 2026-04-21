@@ -4,20 +4,26 @@ args <- commandArgs(trailingOnly = TRUE)
 print(args)
 chunk_num <- as.numeric(args[1])
 n_chunks <- as.numeric(args[2])
+rerun <- as.logical(args[3])
+if(is.na(rerun) | is.null(rerun)){rerun <- FALSE}
+
+if (!requireNamespace("R.utils", quietly = TRUE)) {
+  install.packages("R.utils")
+}
 
 files1 <- list.files()
 files1 <- files1[which(grepl("UKB_sumstats", files1))]
-files1 <- files1[which(grepl("formeta.tsv.gz", files1))]
+files1 <- files1[which(grepl("formeta", files1))]
 length(files1)
 
 files2 <- list.files()
 files2 <- files2[which(grepl("AoUv8_sumstats", files2))]
-files2 <- files2[which(grepl("formeta.tsv.gz", files2))]
+files2 <- files2[which(grepl("formeta", files2))]
 length(files2)
 
 files3 <- list.files()
 files3 <- files3[which(grepl("MGB_sumstats", files3))]
-files3 <- files3[which(grepl("formeta.tsv.gz", files3))]
+files3 <- files3[which(grepl("formeta", files3))]
 length(files3)
 
 files <- c(files1, files2, files3)
@@ -26,8 +32,15 @@ codes <- gsub("_bothsexes.*", "", codes)
 codes <- gsub("_femaleonly.*", "", codes)
 codes <- gsub("_maleonly.*", "", codes)
 codes <- unique(codes)
-length(codes)
+message("total codes: ", length(codes))
 #head(codes,n=30)
+if(rerun){
+  rerun_codes <- rbind(data.table::fread('phecodes_need_removed.tsv', stringsAsFactors=F, data.table=F),
+                       data.table::fread('phecodes_need_rerun.tsv', stringsAsFactors=F, data.table=F)
+                 )
+  codes <- codes[which(codes%in%rerun_codes)]
+  message("rerun codes: ", length(codes))
+}
 
 chunks <- split(c(1:length(codes)), cut(seq_along(codes), n_chunks, labels = FALSE))
 chunk <- chunks[[chunk_num]]
